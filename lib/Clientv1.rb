@@ -30,17 +30,63 @@ def get_all_users
   end
 
 
+  def send_message
+    print "ID of person you are sending it to: "
+    recipient_id = gets.chomp
+    print "Body of message: "
+    message = gets.chomp
+    print
+    sender_id = gets.chomp
+    print
+    password =
+    options =
+  end
 
 
-  def get_users_messages
+
+  def get_users_msgs
     print "What is your user id: "
     uid = gets.chomp.to_i
     print "What is your password: "
     password = gets.chomp
     options = {:password => password, :users_id => uid}
-    resp = self.class.get("/message/#{uid}", :body => options)
+    resp = self.class.get("/msgs/#{uid}", :body => options)
     binding.pry
     msgs = JSON.parse(resp)
     puts msgs
     gets
+  end
+
+  puts "Notepassr Client"
+  client = Notepassr.new
+  while exit != 99
+    system 'clear'
+    puts "Q) Create a new user"
+    puts "W) Send message"
+    puts "E) Get 1 user"
+    puts "R) Get all users"
+    puts "A) Delete a user"
+    puts "S) Get all messages"
+    puts "D) Get a users messages"
+    puts "F) Block a user"
+    puts "J) Get all messages by user"
+    puts "Z) Exit"
+    exit = gets.chomp.to_s
+    when Q
+      client.create_user
+    when W
+      client.send_message
+    when E
+      client.get_single_user
+    when R
+      client.get_all_users
+    when A
+      client.delete_user
+    when S
+      client.get_all_messages
+    when D
+      client.get_users_msgs
+    when F
+      client.get_sent_by_messages
+    end
   end
