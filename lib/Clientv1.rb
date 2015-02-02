@@ -65,11 +65,7 @@ def get_all_users
     puts "W) Send message"
     puts "E) Get 1 user"
     puts "R) Get all users"
-    puts "A) Delete a user"
-    puts "S) Get all messages"
     puts "D) Get a users messages"
-    puts "F) Block a user"
-    puts "J) Get all messages by user"
     puts "Z) Exit"
     exit = gets.chomp.to_s
     when Q
@@ -77,16 +73,14 @@ def get_all_users
     when W
       client.send_message
     when E
-      client.get_single_user
+      client.
     when R
       client.get_all_users
-    when A
-      client.delete_user
-    when S
-      client.get_all_messages
     when D
       client.get_users_msgs
     when F
       client.get_sent_by_messages
+    when Z
+      exit
     end
   end
